@@ -1,0 +1,180 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head id="Head1" runat="server">
+    <title>@ff@n || online shopping</title>
+    <link href="styles/design.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="images/imac-products_1024x1024.png" type="images/png" />
+    <style type="text/css">
+        body {
+            border: 0px;
+            margin: 0px auto;
+        }
+
+        .style {
+            margin: 0px auto;
+            background: #166BFE;
+            padding: 10px;
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 4px;
+            top: 0px;
+            left: -2px;
+            height: 139px;
+        }
+
+        .txtbx {
+            border: 2px solid #07839f;
+            border-radius: 10px;
+            width: 730px;
+            height: 23px;
+        }
+
+        .bttn {
+            border: solid #07839f;
+            border-radius: 10px;
+            width: 105px;
+            height: 28px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div class="style">
+
+            <div style="float: right;">
+                <%
+                    if (Session["user"] == null)
+                    {
+                %>
+                            &nbsp;&nbsp;&nbsp;
+                            <a style="color: white;" href="login.aspx">Login</a>
+                <%
+                    }
+
+                    else
+                    {
+                %>
+                            &nbsp;&nbsp;&nbsp;
+                            <a style="color: white;" href="logout.aspx">logout</a>
+                <%
+                    }
+
+                %>
+          &nbsp;&nbsp;&nbsp;
+          <a style="color: white;" href="registration.aspx">Create Account</a>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <a href="home.aspx">
+                <asp:Image ID="Image1" runat="server" Height="61px" Width="224px"
+                    ImageUrl="~/images/shopnix-large-logo.png" DescriptionUrl="~/pages/home.aspx" />
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" class="txtbx" id="searchtextbox" />
+            <input type="button" class="bttn" value="search" id="Text1" onclick="search();" /><br />
+            &nbsp;
+       
+            <div class="bt">
+
+
+
+                <a href="view_cart.aspx"><i class="fa fa-shopping-cart fa-2x" style="color: white; text-align: right; float: right;" aria-hidden="true">&nbsp;Cart</i></a>
+
+            </div>
+            &nbsp;&nbsp;&nbsp;
+
+    <br />
+            <br />
+
+        </div>
+
+
+
+
+        <div id="content" class="new">
+
+         
+            <div style="width: 1775px; margin: 0px auto;  ">
+                <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" StaticSubMenuIndent="10px" BackColor="#B5C7DE" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="XX-Large" ForeColor="#284E98">
+                    <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
+                    <DynamicMenuItemStyle HorizontalPadding="50px" VerticalPadding="2px" />
+                    <DynamicMenuStyle BackColor="#B5C7DE" />
+                    <DynamicSelectedStyle BackColor="#507CD1" />
+                    <Items>
+                        <asp:MenuItem Text="HOME" Value="New Item" NavigateUrl="~/pages/home.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="ABOUT US" Value="New Item" NavigateUrl="~/pages/about_us.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="YOUR LOCATION" Value="New Item" NavigateUrl="~/pages/contact_us.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="UPCOMING PRODUCT'S" Value="New Item" NavigateUrl="~/pages/upcoming_display.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="ADMIN" Value="New Item" NavigateUrl="~/pages/Admin.aspx"></asp:MenuItem>
+                    </Items>
+                    <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
+                    <StaticMenuItemStyle HorizontalPadding="35px" VerticalPadding="2px" />
+                    <StaticSelectedStyle BackColor="#507CD1" />
+                </asp:Menu>
+            </div>
+            <br />
+        
+            <div id="main" class="main">
+                <h5 style="font-size: 35px; color: #0B5345;">&nbsp;Categories :</h5>
+
+
+                <asp:DataList ID="dd" runat="server">
+
+
+                    <ItemTemplate>
+                        <div class="cat">
+                            <li style="list-style-type: none;"><a href="home.aspx?category=<%#Eval("product_category") %>" style="text-decoration: none;">&nbsp;&nbsp;&nbsp;<%#Eval("product_category") %></a></li>
+                        </div>
+                        <br />
+
+                    </ItemTemplate>
+                </asp:DataList>
+
+
+            </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <br />
+        <br />
+        <div class="footer">
+            <div class="foot">
+                <h4>Developed by : @ff@n</h4>
+            </div>
+            <div class="icon">
+                <br />
+                <br />
+                <a href="https://www.facebook.com/Shop-Nix-146805759260640/"><i class="fa fa-facebook-square  fa-4x" style="color: #005D99;" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/a_f_f_a_n__007/"><i class="fa fa-instagram fa-4x" style="color: #7C00FF;" aria-hidden="true"></i></a>
+                <a href="https://plus.google.com/communities/118370914180294392011?sqinv=aG15Y1VPVW16bHRoclJvemFsM19uTjMyUjhHb25n"><i class="fa fa-google-plus-official fa-4x" style="color: #E74C3C;" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/feed/"><i class="fa fa-linkedin-square fa-4x" style="color: #2E86C1;" aria-hidden="true"></i></a>
+                <a href="https://www.snapchat.com/"><i class="fa fa-snapchat fa-4x" style="color: #FEFA01;" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/Shop_Nix"><i class="fa fa-twitter-square fa-4x" style="color: #01C0FE;" aria-hidden="true"></i></a>
+                <a href="https://web.whatsapp.com/"><i class="fa fa-whatsapp fa-4x" style="color: #61E13B;" aria-hidden="true"></i></a>
+                <a href="https://www.youtube.com/channel/UCe8lj-VR4gWQtMvato2odDQ?disable_polymer=true"><i class="fa fa-youtube-play fa-4x" style="color: #FF0000;" aria-hidden="true"></i></a>
+
+            </div>
+
+
+
+
+        </div>
+
+    </form>
+    <script type="text/javascript">
+        function search() {
+            window.location = "home.aspx?search=" + document.getElementById("searchtextbox").value;
+        }
+    </script>
+
+</body>
+</html>
